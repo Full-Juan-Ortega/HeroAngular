@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from './models/hero';
-import { HEROES } from './models/mock-heroes';
+import { HeroService } from 'src/app/service/hero.service';
+import { MessageService } from 'src/app/service/message.service';
+import { Hero } from '../models/hero';
+
+
+
 
 
 @Component({
@@ -11,16 +15,11 @@ import { HEROES } from './models/mock-heroes';
 
 export class HeroesComponent implements OnInit {
 
-  hero: Hero = {
-  id : 1 ,
-  name : 'Junkrat'
-  }
 
-  heroes = HEROES;
+  heroes : Hero[] | undefined;
+  selectedHero: Hero | undefined;
 
-  
-
-  constructor() { }
+  constructor(private heroService:HeroService ,private messageService : MessageService ) { }
 
 
   // El ngOnInit() es un gancho de ciclo de vida ("lifecycle hook") . 
@@ -28,6 +27,11 @@ export class HeroesComponent implements OnInit {
   // Adecuado para poner la lógica de inicialización
 
   ngOnInit(): void {
+    this.getHeroes();
+  }
+
+  getHeroes(): void {
+    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
   }
 
 }
