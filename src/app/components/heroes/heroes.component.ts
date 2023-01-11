@@ -19,7 +19,8 @@ export class HeroesComponent implements OnInit {
   heroes : Hero[] | undefined;
   selectedHero: Hero | undefined;
 
-  constructor(private heroService:HeroService ,private messageService : MessageService ) { }
+  constructor(private heroService:HeroService ,
+              private messageService : MessageService ) { }
 
 
   // El ngOnInit() es un gancho de ciclo de vida ("lifecycle hook") . 
